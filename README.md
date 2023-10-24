@@ -27,4 +27,5 @@ Notes App hosted on this GitHub repository unite React for the frontend and Node
 git clone https://github.com/ivan-molnar1/notes-app.git
 cd notes-app
 ```
-Happy coding!
+<b>Please do a fork!</b>
+<br>Happy coding!
