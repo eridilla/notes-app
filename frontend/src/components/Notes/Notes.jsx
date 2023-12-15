@@ -50,7 +50,7 @@ const Notes = () => {
     });
   };
 
-  // TODO: Use reduxa instead of useState
+  // TODO: Use redux instead of useState
   const [notes, setNotes] = useState(
     [...Array(5).keys()].map((i) => {
       return { id: i, color: randColor() };
