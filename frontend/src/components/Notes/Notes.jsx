@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Notes.css';
-import { Box, Button, Grid, Stack } from '@mui/material';
+import { Box, Button, Stack } from '@mui/material';
 import StickyNote from '../StickyNote/StickyNote.jsx';
 
 const Notes = () => {
