@@ -1,0 +1,7 @@
+.header-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20rem;
+    height: 5rem;
+}
