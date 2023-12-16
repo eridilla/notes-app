@@ -1,0 +1,19 @@
+.tags-container-yellow::-webkit-scrollbar-track {
+    background: #fff68b;
+}
+
+.tags-container-green::-webkit-scrollbar-track {
+    background: #cdfc93;
+}
+
+.tags-container-pink::-webkit-scrollbar-track {
+    background: #ff7ecd;
+}
+
+.tags-container-purple::-webkit-scrollbar-track {
+     background: #ce81ff;
+}
+
+.tags-container-cyan::-webkit-scrollbar-track {
+    background: #71d7ff;
+}
