@@ -2,11 +2,10 @@ import React from 'react';
 import { Box, IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { remove } from '../../redux/notesSlice.js';
 
 const StickyNoteButtons = ({ props, textDark, handleEdit }) => {
-  const notes = useSelector((state) => state.notes);
   const dispatch = useDispatch();
 
   const removeNote = () => {

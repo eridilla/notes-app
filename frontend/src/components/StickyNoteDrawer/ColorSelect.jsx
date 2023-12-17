@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Button, IconButton, Paper, Popover, Radio, Stack, Typography } from '@mui/material';
+import { IconButton, Paper, Popover, Radio, Stack } from '@mui/material';
 import { ColorPicker } from 'primereact/colorpicker';
-import { hover } from '@testing-library/user-event/dist/hover.js';
 
 const ColorSelect = ({ selectedColor, handleColorChange }) => {
   const colors = [

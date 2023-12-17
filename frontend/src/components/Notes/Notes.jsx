@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import './Notes.css';
-import { Box, Button, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import StickyNote from '../StickyNote/StickyNote.jsx';
-import { useDispatch, useSelector } from 'react-redux';
-import { add } from '../../redux/notesSlice.js';
+import { useSelector } from 'react-redux';
 import StickyNoteDrawer from '../StickyNoteDrawer/StickyNoteDrawer.jsx';
 
 const Notes = () => {

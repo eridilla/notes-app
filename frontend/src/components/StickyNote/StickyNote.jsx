@@ -1,15 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import './SitckyNote.css';
-import {
-  Box,
-  Card,
-  CardContent,
-  containerClasses,
-  Slide,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Card, CardContent, Stack, Typography } from '@mui/material';
 import TagChips from '../TagChips/TagChips.jsx';
 import StickyNoteButtons from './StickyNoteButtons.jsx';
 import StickyNoteForm from './StickyNoteForm.jsx';

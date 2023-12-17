@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Drawer, Paper, Stack, TextField, Typography } from '@mui/material';
 import './StickyNoteDrawer.css';
 import StickyNote from '../StickyNote/StickyNote.jsx';
@@ -53,11 +53,12 @@ const StickyNoteDrawer = ({ props }) => {
   };
 
   const handleAddTag = (event) => {
-    if (event.key === 'Enter') {
+    if ((event.key === 'Enter' || event.type === 'click') && event.target.value) {
       const newTags = event.target.value.split(', ');
+
       props.setNoteProps({
         ...props.noteProps,
-        tags: [...props.noteProps.tags, ...newTags],
+        tags: [...new Set([...props.noteProps.tags, ...newTags])],
       });
 
       event.target.value = '';
