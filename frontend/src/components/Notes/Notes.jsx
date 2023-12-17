@@ -3,41 +3,32 @@ import './Notes.css';
 import { Box, Button, Stack } from '@mui/material';
 import StickyNote from '../StickyNote/StickyNote.jsx';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNote } from '../../redux/notesSlice.js';
+import { add } from '../../redux/notesSlice.js';
+import StickyNoteDrawer from '../StickyNoteDrawer/StickyNoteDrawer.jsx';
 
 const Notes = () => {
-  const notesRedux = useSelector((state) => state.notes);
-  const dispatch = useDispatch();
+  const notes = useSelector((state) => state.notes);
 
-  const randColor = () => {
-    let color = Math.floor(Math.random() * 5) + 1;
+  const [open, setOpen] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const [selectedColor, setSelectedColor] = useState('stickynote.yellow');
+  const [noteProps, setNoteProps] = useState({
+    title: '',
+    content: '',
+    tags: [],
+    color: selectedColor,
+    created: undefined,
+  });
 
-    switch (color) {
-      case 1:
-        color = 'stickynote.yellow';
-        break;
-      case 2:
-        color = 'stickynote.green';
-        break;
-      case 3:
-        color = 'stickynote.pink';
-        break;
-      case 4:
-        color = 'stickynote.cyan';
-        break;
-      case 5:
-        color = 'stickynote.purple';
-        break;
-      default:
-        color = 'stickynote.yellow';
-        break;
-    }
-
-    return color;
+  const handleEdit = (props) => {
+    setNoteProps(props);
+    setEdit(true);
+    setOpen(true);
   };
 
+  const chunkSize = 4;
+
   const chunks = (arr) => {
-    const chunkSize = 4;
     let chunks = [];
 
     for (let i = 0; i < arr.length; i += chunkSize) {
@@ -48,39 +39,29 @@ const Notes = () => {
       return (
         <Stack direction='row' spacing={2}>
           {chunk.map((note) => (
-            <StickyNote key={note.id} props={note} />
+            <StickyNote key={note.id} props={note} handleEdit={handleEdit} />
           ))}
         </Stack>
       );
     });
   };
 
-  const newNote = () => {
-    let newId = Math.max(...notesRedux.notes.map((i) => i.id)) + 1;
-    newId = newId < 0 ? 0 : newId;
-
-    dispatch(
-      addNote({
-        id: newId,
-        title: `New note ${newId}`,
-        content: '*content goes here*',
-        tags: ['tag1', 'tag2', 'tag3'],
-        color: randColor(),
-        created: Date.now(),
-      }),
-    );
-  };
-
   return (
     <Box>
-      {/*<Button variant='contained' onClick={addNote}>*/}
-      {/*  Add Note*/}
-      {/*</Button>*/}
-      <Button variant='contained' onClick={newNote}>
-        Add Note
-      </Button>
+      <StickyNoteDrawer
+        props={{
+          open,
+          setOpen,
+          selectedColor,
+          setSelectedColor,
+          noteProps,
+          setNoteProps,
+          edit,
+          setEdit,
+        }}
+      />
       <Stack direction='column' justifyContent='flex-start' alignItems='flex-start' spacing={2}>
-        {chunks(notesRedux.notes)}
+        {chunks(notes.notes)}
       </Stack>
     </Box>
   );

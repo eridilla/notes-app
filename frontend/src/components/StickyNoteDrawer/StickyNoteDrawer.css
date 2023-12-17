@@ -1,0 +1,9 @@
+.MuiDrawer-paper {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex-direction: column !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    pointer-events: none;
+}
