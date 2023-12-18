@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, IconButton, Stack, TextField, Typography } from '@mui/material';
+import { IconButton, Stack, TextField, Typography } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useDispatch } from 'react-redux';
 import { fetchNotes, filterNotes, reset } from '../../redux/notesSlice.js';

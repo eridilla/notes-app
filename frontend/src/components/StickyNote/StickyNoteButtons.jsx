@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, IconButton, Stack } from '@mui/material';
+import { IconButton, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useDispatch } from 'react-redux';
