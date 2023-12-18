@@ -7,7 +7,7 @@ const StickyNoteForm = ({ props, textDark, setNoteProps }) => {
       <TextField
         fullWidth
         id='title-textarea'
-        placeholder='Title'
+        label='Title - Max characters: 16'
         variant='outlined'
         size='small'
         value={props.title}
@@ -17,14 +17,37 @@ const StickyNoteForm = ({ props, textDark, setNoteProps }) => {
         sx={{
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              borderColor: textDark ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)',
+              borderColor:
+                props.title.length > 16
+                  ? 'rgba(255, 0, 0, 0.23)'
+                  : textDark
+                    ? 'rgba(0, 0, 0, 0.23)'
+                    : 'rgba(255, 255, 255, 0.23)',
             },
             '&:hover fieldset': {
-              borderColor: textDark ? 'rgba(0, 0, 0, 0.5)' : 'rgba(255, 255, 255, 0.5)', // Change the outline color on hover
+              borderColor:
+                props.title.length > 16
+                  ? 'rgba(255, 0, 0, 0.5)'
+                  : textDark
+                    ? 'rgba(0, 0, 0, 0.5)'
+                    : 'rgba(255, 255, 255, 0.5)',
             },
           },
           '& .MuiInputBase-input': {
-            color: textDark ? 'rgba(0, 0, 0, 0.87)' : 'rgba(255, 255, 255, 0.87)',
+            color:
+              props.title.length > 16
+                ? 'rgba(255, 0, 0, 0.87)'
+                : textDark
+                  ? 'rgba(0, 0, 0, 0.87)'
+                  : 'rgba(255, 255, 255, 0.87)',
+          },
+          '& .MuiInputLabel-root': {
+            color:
+              props.title.length > 16
+                ? 'rgba(255, 0, 0, 0.6)'
+                : textDark
+                  ? 'rgba(0, 0, 0, 0.6)'
+                  : 'rgba(255, 255, 255, 0.6)',
           },
         }}
       />
@@ -33,7 +56,7 @@ const StickyNoteForm = ({ props, textDark, setNoteProps }) => {
         multiline
         rows={6}
         id='content-textarea'
-        placeholder='Content'
+        label='Content'
         variant='outlined'
         size='small'
         value={props.content}
@@ -52,6 +75,9 @@ const StickyNoteForm = ({ props, textDark, setNoteProps }) => {
           },
           '& .MuiInputBase-input': {
             color: textDark ? 'rgba(0, 0, 0, 0.87)' : 'rgba(255, 255, 255, 0.87)',
+          },
+          '& .MuiInputLabel-root': {
+            color: textDark ? 'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.6)',
           },
         }}
       />

@@ -1,8 +1,8 @@
 import React from 'react';
-import { IconButton, Stack, TextField, Typography } from '@mui/material';
+import { Box, IconButton, Stack, TextField, Typography } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useDispatch } from 'react-redux';
-import { filterNotes, reset } from '../../redux/notesSlice.js';
+import { fetchNotes, filterNotes, reset } from '../../redux/notesSlice.js';
 
 const Filter = ({ filter, setFilter }) => {
   const dispatch = useDispatch();
@@ -11,7 +11,6 @@ const Filter = ({ filter, setFilter }) => {
     if (event.key === 'Enter') {
       if (!event.target.value) resetFilter();
       else {
-        dispatch(reset());
         dispatch(filterNotes(event.target.value.split(', ')));
       }
     }
@@ -20,19 +19,15 @@ const Filter = ({ filter, setFilter }) => {
   const resetFilter = () => {
     setFilter('');
     dispatch(reset());
+    dispatch(fetchNotes());
   };
 
   return (
-    <Stack
-      direction='row'
-      spacing={2}
-      alignItems='center'
-      sx={{ position: 'absolute', left: '1rem' }}
-    >
+    <Stack direction='row' spacing={2} alignItems='center'>
       <Typography>Filter by tags: </Typography>
       <TextField
         variant='outlined'
-        sx={{ width: '25rem' }}
+        sx={{ width: '20rem' }}
         value={filter}
         onChange={(event) => setFilter(event.target.value)}
         onKeyDown={submitFilter}

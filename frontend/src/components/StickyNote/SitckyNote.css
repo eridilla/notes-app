@@ -1,3 +1,7 @@
 .sticky-note-content {
     height: -webkit-fill-available;
 }
+
+.content-container::-webkit-scrollbar {
+    width: 3px;
+}

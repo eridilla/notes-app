@@ -5,7 +5,8 @@ import StickyNote from '../StickyNote/StickyNote.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import ColorSelect from './ColorSelect.jsx';
 import { add, edit, filterNotes, reset } from '../../redux/notesSlice.js';
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from '@mui/icons-material/AddRounded';
+import axios from 'axios';
 
 const StickyNoteDrawer = ({ props }) => {
   const notes = useSelector((state) => state.notes);
@@ -13,7 +14,7 @@ const StickyNoteDrawer = ({ props }) => {
 
   const handleOpen = () => {
     let newId = Math.max(...notes.notes.map((i) => i.id)) + 1;
-    newId = newId < 0 ? 0 : newId;
+    newId = newId < 1 ? 1 : newId;
 
     props.setNoteProps({
       title: '',
@@ -35,13 +36,28 @@ const StickyNoteDrawer = ({ props }) => {
   };
 
   const handleSubmit = () => {
+    if (props.noteProps.title.length > 16) {
+      return;
+    }
+
     if (props.edit) {
+      axios.put(
+        `https://657fb4f26ae0629a3f538905.mockapi.io/notes-app/api/notes/${props.noteProps.id}`,
+        {
+          ...props.noteProps,
+        },
+      );
       dispatch(edit(props.noteProps));
     } else {
       let newId = Math.max(...notes.notes.map((i) => i.id)) + 1;
-      newId = newId < 0 ? 0 : newId;
+      newId = newId < 1 ? 1 : newId;
 
-      dispatch(reset());
+      axios.post('https://657fb4f26ae0629a3f538905.mockapi.io/notes-app/api/notes', {
+        ...props.noteProps,
+        id: newId,
+        created: Date.now(),
+      });
+
       dispatch(
         add({
           ...props.noteProps,
@@ -49,6 +65,8 @@ const StickyNoteDrawer = ({ props }) => {
           created: Date.now(),
         }),
       );
+
+      dispatch(reset());
       if (props.filter) dispatch(filterNotes(props.filter.split(', ')));
     }
 
@@ -82,7 +100,7 @@ const StickyNoteDrawer = ({ props }) => {
           elevation={7}
           sx={{
             width: '30rem',
-            height: '40%',
+            height: '45rem',
             bgcolor: '#fff5c5',
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,

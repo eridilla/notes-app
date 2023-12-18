@@ -53,7 +53,7 @@ const StickyNote = ({ props, editing = false, setNoteProps, handleEdit }) => {
           alignItems='flex-start'
           sx={{ height: '100%' }}
         >
-          <Box sx={{ width: '100%' }}>
+          <Box sx={{ height: '85%', width: '100%' }}>
             <Stack direction='row' justifyContent='space-between'>
               <Typography
                 sx={{ fontSize: 14 }}
@@ -70,8 +70,8 @@ const StickyNote = ({ props, editing = false, setNoteProps, handleEdit }) => {
                 {date}
               </Typography>
             </Stack>
-            <Stack direction='row' justifyContent='space-between'>
-              <Box>
+            <Stack direction='row' justifyContent='space-between' sx={{ height: '100%' }}>
+              <Box sx={{ maxWidth: '85%' }}>
                 {editing ? (
                   <StickyNoteForm props={props} textDark={textDark} setNoteProps={setNoteProps} />
                 ) : (
@@ -79,13 +79,18 @@ const StickyNote = ({ props, editing = false, setNoteProps, handleEdit }) => {
                     <Typography variant='h5' component='div'>
                       {props.title}
                     </Typography>
-                    <Typography variant='body2'>{props.content}</Typography>
+                    <Box className='content-container' sx={{ maxHeight: '70%', overflowY: 'auto' }}>
+                      <Typography sx={{ wordBreak: 'break-word' }}>{props.content}</Typography>
+                    </Box>
                   </>
                 )}
               </Box>
-              {showButtons && !editing && (
-                <StickyNoteButtons props={props} textDark={textDark} handleEdit={handleEdit} />
-              )}
+              <StickyNoteButtons
+                show={showButtons && !editing}
+                props={props}
+                textDark={textDark}
+                handleEdit={handleEdit}
+              />
             </Stack>
           </Box>
           <TagChips

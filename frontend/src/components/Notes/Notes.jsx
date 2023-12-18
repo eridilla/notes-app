@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './Notes.css';
-import { Box, Stack, Typography } from '@mui/material';
+import { Box, CircularProgress, Stack, Typography } from '@mui/material';
 import StickyNote from '../StickyNote/StickyNote.jsx';
 import { useSelector } from 'react-redux';
 import StickyNoteDrawer from '../StickyNoteDrawer/StickyNoteDrawer.jsx';
-import SouthEastIcon from '@mui/icons-material/SouthEast';
+import SouthEastRoundedIcon from '@mui/icons-material/SouthEastRounded';
 
 const Notes = ({ filter }) => {
   const notes = useSelector((state) => state.notes);
@@ -42,7 +42,7 @@ const Notes = ({ filter }) => {
           <Typography sx={{ fontSize: '2.5rem', color: 'rgba(0,0,0,0.3)' }}>
             Write a new note by clicking the +
           </Typography>
-          <SouthEastIcon sx={{ fontSize: '5rem', color: 'rgba(0,0,0,0.3)' }} />
+          <SouthEastRoundedIcon sx={{ fontSize: '5rem', color: 'rgba(0,0,0,0.3)' }} />
         </Stack>
       );
     }
@@ -80,7 +80,11 @@ const Notes = ({ filter }) => {
         }}
       />
       <Stack direction='column' justifyContent='flex-start' alignItems='flex-start' spacing={2}>
-        {chunks(notes.notes)}
+        {notes.loading ? (
+          <CircularProgress size='5rem' sx={{ color: 'rgba(0,0,0,0.3)' }} />
+        ) : (
+          chunks(notes.notes)
+        )}
       </Stack>
     </Box>
   );
